@@ -9,16 +9,16 @@ on:
         required: true
 
   # workflows that call this workflow, will need to use the dispatch below
-  # workflow_dispatch:
-  #   inputs:
-  #     bump:
-  #       type: choice
-  #       description: Select the version
-  #       required: true
-  #       options:
-  #         - major
-  #         - minor
-  #         - patch
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Select the version
+        required: true
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
