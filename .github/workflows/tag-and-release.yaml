@@ -1,0 +1,37 @@
+name: Tag and Release
+
+on:
+  workflow_call:
+    inputs:
+      bump:
+        type: string
+        description: Select the version
+        required: true
+
+  # workflows that call this workflow, will need to use the dispatch below
+  # workflow_dispatch:
+  #   inputs:
+  #     bump:
+  #       type: choice
+  #       description: Select the version
+  #       required: true
+  #       options:
+  #         - major
+  #         - minor
+  #         - patch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - id: next_version
+        uses: zwaldowski/semver-release-action@master
+        with:
+          prefix: v
+          bump: ${{ github.event.inputs.bump }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          automatic_release_tag: ${{ steps.next_version.outputs.version_tag }}
