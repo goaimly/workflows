@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: next_version
-        uses: zwaldowski/semver-release-action@master
+        uses: zwaldowski/semver-release-action@661db1b63c7c5a850dd333da59483c3292c8e1ad
         with:
           prefix: v
           bump: ${{ github.event.inputs.bump }}
