@@ -6,9 +6,6 @@ on:
       service:
         type: string
         required: true
-      release:
-        type: boolean
-        required: true
       version:
         type: string
         required: true
@@ -16,9 +13,9 @@ on:
 jobs:
   runs-on: ubuntu-latest
   env:
-    VERSION: ${{ github.events.inputs.release ? ${{ github.events.inputs.version }} : "${{ github.events.inputs.version }}-${{ github.event.repository.updated_at}}" }}
+    VERSION: ${{ github.event.inputs.version }}
   steps:
-    -name: Set up Docker Buildx
+    - name: Set up Docker Buildx
       id: buildx
       uses: docker/setup-buildx-action@v2
       with:
