@@ -15,7 +15,6 @@ on:
       AWS_SECRET_ACCESS_KEY:
         required: true
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
