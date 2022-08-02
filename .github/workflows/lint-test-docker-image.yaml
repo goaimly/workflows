@@ -43,4 +43,4 @@ jobs:
 
       - name: Test the image
         run: |
-          docker run $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION-build test
+          docker run $ECR_REGISTRY/$ECR_REPOSITORY-build:$VERSION test
