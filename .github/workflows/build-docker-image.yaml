@@ -19,6 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      ECR_REPOSITORY: ${{ inputs.service }}
       VERSION: ${{ inputs.version }}
     steps:
       - name: Set up Docker Buildx
@@ -50,11 +51,8 @@ jobs:
       - name: Tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ inputs.service }}
         run: |
-          DOCKER_BUILDKIT=1 docker build \
-            --cache-from $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-            --progress plain \
+          docker build \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION \
             --target release .
