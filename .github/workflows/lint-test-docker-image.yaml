@@ -51,17 +51,5 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker build \
-            -t $ECR_REGISTRY/$ECR_REPOSITORY-build:$VERSION \
-            --target build .
-
-      - name: Push image to Amazon ECR
-        run: |
-          docker image push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY-build
-
-      - name: test
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ inputs.service }}
-        run: |
-          docker run $ECR_REGISTRY/$ECR_REPOSITORY-build:$VERSION test
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION
