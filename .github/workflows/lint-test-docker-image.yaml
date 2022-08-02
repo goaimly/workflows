@@ -19,7 +19,7 @@ jobs:
   build-base:
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ github.event.inputs.version }}
+      VERSION: ${{ inputs.version }}
     steps:
       - name: Set up Docker Buildx
         id: buildx
@@ -49,7 +49,7 @@ jobs:
       - name: Create build layer tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.inputs.service }}
+          ECR_REPOSITORY: ${{ inputs.service }}
         run: |
           DOCKER_BUILDKIT=1 docker build \
             --cache-from $ECR_REGISTRY/$ECR_REPOSITORY-build:latest \
@@ -63,12 +63,12 @@ jobs:
       - name: lint
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.inputs.service }}
+          ECR_REPOSITORY: ${{ inputs.service }}
         run: |
           docker run $ECR_REGISTRY/$ECR_REPOSITORY-build:$VERSION lint
       - name: test
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.inputs.service }}
+          ECR_REPOSITORY: ${{ inputs.service }}
         run: |
           docker run $ECR_REGISTRY/$ECR_REPOSITORY-build:$VERSION test
