@@ -9,9 +9,6 @@ on:
       version:
         type: string
         required: true
-      production:
-        type: boolean
-        required: true
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
