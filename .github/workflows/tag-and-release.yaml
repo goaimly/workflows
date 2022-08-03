@@ -22,9 +22,6 @@ on:
           - major
           - minor
           - patch
-    secrets:
-      PAT:
-        default: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
@@ -35,7 +32,7 @@ jobs:
         with:
           prefix: v
           bump: ${{ github.event.inputs.bump }}
-          github_token: ${{ secrets.PAT }} || ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
