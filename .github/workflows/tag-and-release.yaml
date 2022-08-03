@@ -32,7 +32,7 @@ jobs:
         with:
           prefix: v
           bump: ${{ github.event.inputs.bump }}
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.PAT }} || ${{ secrets.GITHUB_TOKEN }}
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
