@@ -35,6 +35,6 @@ jobs:
           github_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
       - uses: marvinpinto/action-automatic-releases@latest
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           prerelease: false
           automatic_release_tag: ${{ steps.next_version.outputs.version_tag }}
