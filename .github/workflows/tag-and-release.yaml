@@ -7,6 +7,9 @@ on:
         type: string
         description: Select the version
         required: true
+    secrets:
+      PAT:
+        required: true
 
   # workflows that call this workflow, will need to use the dispatch below
   workflow_dispatch:
@@ -29,7 +32,7 @@ jobs:
         with:
           prefix: v
           bump: ${{ github.event.inputs.bump }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
