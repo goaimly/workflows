@@ -22,6 +22,9 @@ on:
           - major
           - minor
           - patch
+    secrets:
+      PAT:
+        default: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
