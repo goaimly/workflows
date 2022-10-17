@@ -17,3 +17,4 @@ jobs:
 Note: there are other modifications necessary to make this work, this is just an example to call the workflow from another repository.
 
 See [reusing workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) for more details.
+
