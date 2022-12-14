@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - 'yarn.lock'
+      - 'package.json'
+      - '.dockerignore'
+      - '.github/workflows/**
